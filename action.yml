@@ -1,6 +1,9 @@
 # This workflow ensures all code being pushed to your repository is formatted.
 # Feel free to change it so it happens on pulls! Look over Github's documentation on actions if you're confused
-name: Auto-Format
+name: Unity-Actions-AutoFormat
+description: This helps to reduce merge conflicts that are simply caused by formatting (whitespace, bracket position, etc.) when merging branches.
+icon: align-left
+color: orange
 
 # Controls when the action will run. This means it will trigger on all branches
 on:
