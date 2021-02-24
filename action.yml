@@ -2,8 +2,10 @@
 # Feel free to change it so it happens on pulls! Look over Github's documentation on actions if you're confused
 name: Unity-Actions-AutoFormat
 description: This helps to reduce merge conflicts that are simply caused by formatting (whitespace, bracket position, etc.) when merging branches.
-icon: align-left
-color: orange
+author: Ty Irvine
+branding:
+  icon: 'align-left'
+  color: 'orange'
 
 # Controls when the action will run. This means it will trigger on all branches
 on:
