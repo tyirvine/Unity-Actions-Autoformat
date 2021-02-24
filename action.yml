@@ -1,0 +1,71 @@
+# This workflow ensures all code being pushed to your repository is formatted.
+# Feel free to change it so it happens on pulls! Look over Github's documentation on actions if you're confused
+name: Auto-Format
+
+# Controls when the action will run. This means it will trigger on all branches
+on:
+  push:
+    branches: 
+      - "**"
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  dotnet-format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Branch Info
+        shell: bash
+        run: echo "##[set-output name=ref;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: comment-branch
+
+      - name: Checkout repo
+        uses: actions/checkout@v2.3.2
+        with:
+          ref: ${{ steps.comment-branch.outputs.ref }}
+          persist-credentials: false
+
+      - name: Check latest commit message
+        id: log
+        run: echo "::set-output name=message::$(git log --no-merges -1 --oneline)"
+
+      - name: Check Assets/Scripts folder existence
+        id: check_folder
+        uses: andstor/file-existence-action@v1.0.1
+        with:
+          files: "./Assets/Scripts/"
+
+      - name: Install dotnet-format
+        if: "!contains(steps.log.outputs.message, 'skip ci') && steps.check_folder.outputs.files_exists == 'true'"
+        run: dotnet tool install -g dotnet-format
+
+      - name: Check format
+        if: "!contains(steps.log.outputs.message, 'skip ci') && steps.check_folder.outputs.files_exists == 'true'"
+        id: check
+        uses: brmenchl/dotnet-format@v1.0.2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          action: "check"
+          folder: ./Assets/Scripts
+          fail-fast: false
+
+      - name: Run format
+        if: steps.check.outputs.has-changes == 'true'
+        uses: brmenchl/dotnet-format@v1.0.2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          action: "fix"
+          folder: ./Assets/Scripts
+
+      - name: Commit files
+        if: steps.check.outputs.has-changes == 'true'
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -a -m 'Automated dotnet-format update [skip ci]' -m 'Co-authored-by: ${{ github.event.pull_request.user.login }} <${{ github.event.pull_request.user.id }}+${{ github.event.pull_request.user.login }}@users.noreply.github.com>'
+          
+      - name: Push changes
+        if: steps.check.outputs.has-changes == 'true'
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          branch: ${{ steps.comment-branch.outputs.ref }}
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
