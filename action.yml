@@ -1,7 +1,7 @@
 # This workflow ensures all code being pushed to your repository is formatted.
 # Feel free to change it so it happens on pulls! Look over Github's documentation on actions if you're confused
 name: Unity-Actions-AutoFormat
-description: This helps to reduce merge conflicts that are simply caused by formatting (whitespace, bracket position, etc.) when merging branches.
+description: This helps to reduce C# merge conflicts that are caused by formatting.
 author: Ty Irvine
 branding:
   icon: 'align-left'
