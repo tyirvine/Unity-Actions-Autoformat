@@ -31,7 +31,7 @@ runs:
     - name: Checkout repo
       uses: actions/checkout@v2.3.2
       with:
-        ref: ${{ steps.comment-branch.outputs.ref }}
+        ref: steps.comment-branch.outputs.ref
         persist-credentials: false
 
     - name: Check latest commit message
