@@ -8,11 +8,9 @@ branding:
   color: 'orange'
 
 # Here is where we define what inputs we want for the composite action
-secrets:
+inputs:
   GITHUB_TOKEN:
-    default: ${{ secrets.GITHUB_TOKEN }}
   PERSONAL_ACCESS_TOKEN:
-    default: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
     
 
 # This is called a composite run. It groups multiple steps into one executable action.
@@ -50,7 +48,7 @@ runs:
       id: check
       uses: brmenchl/dotnet-format@v1.0.2
       with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        repo-token: ${{ inputs.GITHUB_TOKEN }}
         action: "check"
         folder: ./Assets/Scripts
         fail-fast: false
@@ -59,7 +57,7 @@ runs:
       if: steps.check.outputs.has-changes == 'true'
       uses: brmenchl/dotnet-format@v1.0.2
       with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        repo-token: ${{ inputs.GITHUB_TOKEN }}
         action: "fix"
         folder: ./Assets/Scripts
 
@@ -75,4 +73,4 @@ runs:
       uses: ad-m/github-push-action@v0.6.0
       with:
         branch: ${{ steps.comment-branch.outputs.ref }}
-        github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        github_token: ${{ inputs.PERSONAL_ACCESS_TOKEN }}
