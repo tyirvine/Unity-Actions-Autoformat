@@ -10,7 +10,12 @@ branding:
 # Here is where we define what inputs we want for the composite action
 inputs:
   GITHUB_TOKEN:
+    description: "The GITHUB_TOKEN secret."
+    required: true
+    
   PERSONAL_ACCESS_TOKEN:
+    description: "For making commits."
+    required: true
     
 
 # This is called a composite run. It groups multiple steps into one executable action.
