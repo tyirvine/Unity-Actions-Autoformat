@@ -53,7 +53,7 @@ runs:
       id: check
       uses: brmenchl/dotnet-format@v1.0.2
       with:
-        repo-token: ${{ github.token }}
+        repo-token: ${{ inputs.repo-token }}
         action: "check"
         folder: ./Assets/Scripts
         fail-fast: false
@@ -62,7 +62,7 @@ runs:
       if: steps.check.outputs.has-changes == 'true'
       uses: brmenchl/dotnet-format@v1.0.2
       with:
-        repo-token: ${{ github.token }}
+        repo-token: ${{ inputs.repo-token }}
         action: "fix"
         folder: ./Assets/Scripts
 
