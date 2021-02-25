@@ -2,7 +2,7 @@
 # Feel free to change it so it happens on pulls! Look over Github's documentation on actions if you're confused
 name: Auto Format
 
-# Controls when the action will run. This means it will trigger on all branches
+# Controls when the action will run. This means it will trigger on any branch after a push
 on:
   push:
     branches: 
