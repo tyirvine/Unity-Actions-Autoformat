@@ -9,11 +9,11 @@ branding:
 
 # Here is where we define what inputs we want for the composite action
 inputs:
-  GITHUB_TOKEN:
-    description: "The GITHUB_TOKEN secret."
+  repo-token:
+    description: "The repo-token secret."
     required: true
     
-  PERSONAL_ACCESS_TOKEN:
+  access-token:
     description: "For making commits."
     required: true
     
@@ -53,7 +53,7 @@ runs:
       id: check
       uses: brmenchl/dotnet-format@v1.0.2
       with:
-        repo-token: ${{ inputs.GITHUB_TOKEN }}
+        repo-token: ${{ inputs.repo-token }}
         action: "check"
         folder: ./Assets/Scripts
         fail-fast: false
@@ -62,7 +62,7 @@ runs:
       if: steps.check.outputs.has-changes == 'true'
       uses: brmenchl/dotnet-format@v1.0.2
       with:
-        repo-token: ${{ inputs.GITHUB_TOKEN }}
+        repo-token: ${{ inputs.repo-token }}
         action: "fix"
         folder: ./Assets/Scripts
 
@@ -78,4 +78,4 @@ runs:
       uses: ad-m/github-push-action@v0.6.0
       with:
         branch: ${{ steps.comment-branch.outputs.ref }}
-        github_token: ${{ inputs.PERSONAL_ACCESS_TOKEN }}
+        github_token: ${{ inputs.access-token }}
