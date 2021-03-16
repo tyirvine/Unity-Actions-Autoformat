@@ -33,7 +33,7 @@ jobs:
         uses: andstor/file-existence-action@v1.0.1
         with:
           files: "./Assets/Scripts/"
-
+          
       - name: Install dotnet-format
         if: "!contains(steps.log.outputs.message, 'skip ci') && steps.check_folder.outputs.files_exists == 'true'"
         run: dotnet tool install -g dotnet-format
