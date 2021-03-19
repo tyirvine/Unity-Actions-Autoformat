@@ -16,7 +16,6 @@ inputs:
   token:
     description: 'A token used to commit and push to this repository.'
     required: true
-    default: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
   
 # The inputs above are then fed into a the Dockerfile
 runs:
