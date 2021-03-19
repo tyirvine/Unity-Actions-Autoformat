@@ -1,11 +1,12 @@
 # Container image that runs your code
 # FROM alpine:3.10
 FROM mcr.microsoft.com/dotnet/sdk:5.0
-# ARG REPO=mcr.microsoft.com/dotnet/aspnet
-# FROM $REPO:5.0-alpine3.13-amd64
 
 # Install dotnet
 RUN dotnet tool install -g dotnet-format
+
+# Set dotnet tool to path
+ENV PATH="${PATH}:/root/.dotnet/tools"
 
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY format.sh /format.sh
