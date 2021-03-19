@@ -1,8 +1,8 @@
 #!/bin/sh -l
 
 # Setup variables
-path = $1
-token = $2
+path=$1
+token=$2
 
 # Confirm existence of folder
 if [ -d $path ]; then
