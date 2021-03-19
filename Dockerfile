@@ -4,6 +4,9 @@
 ARG REPO=mcr.microsoft.com/dotnet/aspnet
 FROM $REPO:5.0-alpine3.13-amd64
 
+# Install dotnet
+RUN dotnet tool install -g dotnet-format
+
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY format.sh /format.sh
 

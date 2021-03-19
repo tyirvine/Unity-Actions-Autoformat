@@ -5,7 +5,6 @@ path=$1
 token=$2
 
 # Install dotnet format
-dotnet tool install -g dotnet-format
 
 # Confirm existence of folder
 if [ -d $path ]; then
