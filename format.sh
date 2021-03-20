@@ -4,12 +4,14 @@
 path=$1
 token=$2
 
+dotnet tool install -g dotnet-format
+
 # Confirm existence of folder
 if [ -d $path ]; then
     echo "$path exists"
 
     # Format files in folder
-    dotnet format --version
+    # dotnet format --version
 
     # Check for changes
 
