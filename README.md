@@ -8,9 +8,17 @@ Here's the original gist → https://gist.github.com/shiena/197f949bc513858a8588
 
 ## Usage
 
-Unfortunately Github composite actions do not support uses yet. Meaning, at the time of writing this, basically only shell scripts can be run from composite actions. So instead you can find a full workflow in [`example-workflow.yml`](example-workflow.yml).
+```yaml
+      - name: Unity Auto Format
+        uses: tyirvine/Unity-Actions-Autoformat@v1.0.5
+        with:
+          path: './Assets/Scripts/'
+```
+Check out [example-workflow.yml](example-workflow.yml) for a full example of this action in use!
 
-Simply copy the contents from there and paste them into a new workflow in your repository.
+## What it does
+It takes in the path, formats all the scripts, commits all the files, then pushes to the active branch.
 
 ## Change Log
+* March 19th 2021 - Turned workflow into a single shell script! Much easier to add in now.
 * March 16th 2021 - For some reason the workflow was failing, likely due to a change in another action being used. I updated the workflow for reliability. It now relies on less Actions and instead just formats using `dotnet format ./pathToScripts --folder` right in the shell, then checks for changes, and commits & pushes if so.
