@@ -6,3 +6,20 @@ author: Ty Irvine
 branding:
   icon: 'align-left'
   color: 'orange'
+
+# This is where we gather the inputs for the action
+inputs:
+  path:
+    description: 'This is the path to the scripts you want to format.'
+    required: true
+    default: './Assets/Scripts/'
+  token:
+    description: 'A token used to commit and push to this repository.'
+    required: true
+  
+# The inputs above are then fed into a the Dockerfile
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.path }}
