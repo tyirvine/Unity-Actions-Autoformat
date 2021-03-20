@@ -17,7 +17,8 @@ export PATH="$PATH:/github/home/.dotnet/tools"
 
 # Clean up the console
 printf "\n"
-printf "${Yellow}========= BEGIN FORMATTING =========${Reset}"
+printf "${Yellow}==================== BEGIN FORMATTING ====================${Reset}"
+printf "\n"
 printf "\n"
 
 
