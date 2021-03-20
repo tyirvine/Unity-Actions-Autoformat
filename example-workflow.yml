@@ -1,61 +1,32 @@
-# This workflow ensures all code being pushed to your repository is formatted.
-# Feel free to change it so it happens on pulls! Look over Github's documentation on actions if you're confused
-name: Auto Format
+# This is a basic workflow to help you get started with Actions
+name: Format Scripts
 
-# Controls when the action will run. This means it will trigger on any branch after a push
+# Controls when the action will run. 
 on:
+  # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: 
+    branches:
       - "**"
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  dotnet-format:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Get Branch Info
-        shell: bash
-        run: echo "##[set-output name=ref;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: comment-branch
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
 
-      - name: Checkout repo
-        uses: actions/checkout@v2.3.2
+      # Runs a single command using the runners shell
+      - name: Unity Auto Format
+        # You may pin to the exact commit or the version.
+        # uses: tyirvine/Unity-Actions-Autoformat@2130bb3289214c8ed397d9dd168b314477035d9d
+        uses: tyirvine/Unity-Actions-Autoformat@v1.0.5
         with:
-          ref: ${{ steps.comment-branch.outputs.ref }}
-          persist-credentials: false
-
-      - name: Check latest commit message
-        id: log
-        run: echo "::set-output name=message::$(git log --no-merges -1 --oneline)"
-
-      - name: Check Assets/Scripts folder existence
-        id: check_folder
-        uses: andstor/file-existence-action@v1.0.1
-        with:
-          files: "./Assets/Scripts/"
-      
-      - name: Install dotnet-format
-        if: (!contains(steps.log.outputs.message, 'skip ci') && steps.check_folder.outputs.files_exists == 'true')
-        run: dotnet tool install -g dotnet-format
-
-      - name: Format files
-        if: steps.check_folder.outputs.files_exists == 'true'
-        run: dotnet format ./Assets/Scripts --folder
-        
-      - name: Check if there are any changes
-        id: changes
-        uses: UnicornGlobal/has-changes-action@v1.0.12
-
-      - name: Commit files
-        if: steps.changes.outputs.changed == 1
-        run: |
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -a -m 'Automated dotnet-format update [skip ci]' -m 'Co-authored-by: ${{ github.event.pull_request.user.login }} <${{ github.event.pull_request.user.id }}+${{ github.event.pull_request.user.login }}@users.noreply.github.com>'
-          
-      - name: Push changes
-        if: steps.changes.outputs.changed == 1
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          branch: ${{ steps.comment-branch.outputs.ref }}
-          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: './Assets/Scripts/'
