@@ -24,9 +24,12 @@ if [ -d $path ]; then
         # Changes
         echo "Changes detected"
 
+        # Configure Git
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "github-actions[bot]"
+
         # Commit
-        git status
-        git add .
+        git add -A
         git commit -m "Auto-format Bot"
 
         # Push
