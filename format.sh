@@ -15,10 +15,11 @@ dotnet tool install -g dotnet-format
 export PATH="$PATH:/github/home/.dotnet/tools"
 
 # Clean up the console
-for (( c=0; c<=5; c++ ))
-do
-    printf "\n"
-done
+printf "\n"
+printf "\n"
+printf "\n"
+printf "\n"
+printf "\n"
 
 # Confirm existence of folder
 if [ -d $path ]; then
