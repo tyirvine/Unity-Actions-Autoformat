@@ -20,7 +20,7 @@ if [ -d $path ]; then
     dotnet format $path -f
 
     # Check for changes
-    if [ git status --porcelain ]; then
+    if [ -n "$(git status --porcelain)" ]; then
         # Changes
         echo "Changes detected"
     else
