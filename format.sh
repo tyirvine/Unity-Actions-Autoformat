@@ -23,15 +23,17 @@ if [ -d $path ]; then
     if [ -n "$(git status --porcelain)" ]; then
         # Changes
         echo "Changes detected"
+
+        # Commit
+        git status
+
+        # Push
+
     else
         # No changes
         echo "No changes detected"
 
     fi
-
-    # Commit
-
-    # Push
 
 else
     echo "$path does not exist"
