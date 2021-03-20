@@ -26,8 +26,11 @@ if [ -d $path ]; then
 
         # Commit
         git status
+        git add .
+        git commit -m "Auto-format Bot"
 
         # Push
+        git push
 
     else
         # No changes
