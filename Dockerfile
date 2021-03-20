@@ -1,6 +1,6 @@
 # Container image that runs your code
 # FROM alpine:3.10
-FROM mcr.microsoft.com/dotnet/sdk:5.0
+FROM mcr.microsoft.com/dotnet/sdk:5.0 as build-env
 
 # Install dotnet
 RUN dotnet tool install -g dotnet-format
