@@ -1,7 +1,7 @@
 # This workflow ensures all code being pushed to your repository is formatted.
 # Feel free to change it so it happens on pulls! Look over Github's documentation on actions if you're confused
 name: Unity Auto Format
-description: This is a workflow, not an action! Please visit the full listing for usage instructions. ⤵︎
+description: Simply supply the path to your scripts directory to the action!
 author: Ty Irvine
 branding:
   icon: 'align-left'
@@ -13,9 +13,6 @@ inputs:
     description: 'This is the path to the scripts you want to format.'
     required: true
     default: './Assets/Scripts/'
-  token:
-    description: 'A token used to commit and push to this repository.'
-    required: true
   
 # The inputs above are then fed into a the Dockerfile
 runs:
