@@ -29,4 +29,4 @@ jobs:
         # uses: tyirvine/Unity-Actions-Autoformat@2130bb3289214c8ed397d9dd168b314477035d9d
         uses: tyirvine/Unity-Actions-Autoformat@v1.0.5
         with:
-          path: './Assets/Scripts/'
+          path: ./Assets/Scripts/
