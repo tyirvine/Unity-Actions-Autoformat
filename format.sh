@@ -17,10 +17,10 @@ if [ -d $path ]; then
     echo "$path exists"
 
     # Format files in folder
-    dotnet format $path
+    dotnet format $path -f
 
     # Check for changes
-    if [[ `git status --porcelain` ]]; then
+    if [ git status --porcelain ]; then
         # Changes
         echo "Changes detected"
     else
