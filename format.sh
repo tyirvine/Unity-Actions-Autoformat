@@ -27,6 +27,8 @@ if [ -d $path ]; then
         # No changes
         echo "No changes detected"
 
+    fi
+
     # Commit
 
     # Push
