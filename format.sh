@@ -4,6 +4,7 @@
 Reset='\033[0m'       # Text Reset
 Red='\033[0;31m'          # Red
 Green='\033[0;32m'        # Green
+Yellow='\033[0;33m'       # Yellow
 
 # Setup variables
 path=$1
@@ -16,10 +17,9 @@ export PATH="$PATH:/github/home/.dotnet/tools"
 
 # Clean up the console
 printf "\n"
+printf "${Yellow}========= BEGIN FORMATTING =========${Reset}"
 printf "\n"
-printf "\n"
-printf "\n"
-printf "\n"
+
 
 # Confirm existence of folder
 if [ -d $path ]; then
