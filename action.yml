@@ -23,4 +23,4 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.path }}
-    - ${{ inputs.token }}
+    # - ${{ inputs.token }}

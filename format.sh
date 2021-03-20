@@ -2,7 +2,7 @@
 
 # Setup variables
 path=$1
-token=$2
+# token=$2
 
 # Install dotnet
 dotnet tool install -g dotnet-format
@@ -17,7 +17,7 @@ if [ -d $path ]; then
     echo "$path exists"
 
     # Format files in folder
-    dotnet format $path -f
+    dotnet format -f -w $path
 
     # Check for changes
     if [ -n "$(git status --porcelain)" ]; then
@@ -30,7 +30,7 @@ if [ -d $path ]; then
 
         # Commit
         git add -A
-        git commit -m "Auto-format Bot"
+        git commit -m "Automated Scripts Format"
 
         # Push
         git push
