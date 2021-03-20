@@ -1,8 +1,12 @@
 #!/bin/sh -l
 
+# Setup colours
+Reset='\033[0m'       # Text Reset
+Red='\033[0;31m'          # Red
+Green='\033[0;32m'        # Green
+
 # Setup variables
 path=$1
-# token=$2
 
 # Install dotnet
 dotnet tool install -g dotnet-format
@@ -10,11 +14,17 @@ dotnet tool install -g dotnet-format
 # Set the path to the tool
 export PATH="$PATH:/github/home/.dotnet/tools"
 
+# Clean up the console
+for (( c=0; c<=5; c++ ))
+do
+    printf "\n"
+done
+
 # Confirm existence of folder
 if [ -d $path ]; then
 
     # Announce that the path exists
-    echo "$path exists"
+    echo "${Green}$path exists ${Reset}✅"
 
     # Format files in folder
     dotnet format -f -w $path
@@ -22,7 +32,7 @@ if [ -d $path ]; then
     # Check for changes
     if [ -n "$(git status --porcelain)" ]; then
         # Changes
-        echo "Changes detected"
+        echo "${Green}Changes detected${Reset}"
 
         # Configure Git
         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -30,7 +40,7 @@ if [ -d $path ]; then
 
         # Commit
         git add -A
-        git commit -m "Automated Scripts Format"
+        git commit -m "Formatted Scripts"
 
         # Push
         git push
@@ -42,7 +52,6 @@ if [ -d $path ]; then
     fi
 
 else
-    echo "$path does not exist"
-
+    echo "${Red}$path does not exist${Reset}"
 
 fi
