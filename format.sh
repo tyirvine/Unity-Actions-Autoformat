@@ -6,6 +6,10 @@ token=$2
 
 dotnet tool install -g dotnet-format
 
+export PATH="$PATH:/github/home/.dotnet/tools"
+
+dotnet format --version
+
 # Confirm existence of folder
 if [ -d $path ]; then
     echo "$path exists"
