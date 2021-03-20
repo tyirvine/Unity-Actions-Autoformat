@@ -10,7 +10,7 @@ branding:
 # This is where we gather the inputs for the action
 inputs:
   path:
-    description: 'This is the path to the scripts you want to format.'
+    description: 'The path to the scripts you want formatted ⤵︎'
     required: true
     default: './Assets/Scripts/'
   
